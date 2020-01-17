@@ -57,7 +57,7 @@ card_count = 0
         node = nm.node.parent
         edition = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.children[1].children.text
         name_node = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
-        version_name = name_node.text.delete("\n").strip
+        version_name = name_node.text.delete("\n").strip.gsub('|', '//')
         if version_name.downcase.include? "(not tournament legal)"
           link = name_node.child.child.attr('href')
           puts "|||Ignoring #{version_name} ( #{link} )"

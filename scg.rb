@@ -17,7 +17,7 @@ all_cards.each { |name, card|
   }
   translations[name.downcase] = name.downcase
 }
-puts "Tengo #{translations.length} nombres"
+puts "I have #{translations.length} names"
 
 all_cards = nil
 
@@ -36,7 +36,7 @@ total_price = 0
 "overgrown tomb"
 ].each do |card_name|
   card = translations[card_name.downcase]
-  puts "No conozco #{card_name}" unless card
+  puts "I don't know #{card_name}" unless card
   next unless card
   begin
     page = agent.get("http://www.starcitygames.com/results?name=#{card}&auto=Y")
@@ -45,7 +45,6 @@ total_price = 0
     cheap_price = nil
     cheap_name = nil
     nms.each { |nm|
-      # binding.pry
       node = nm.node.parent
       while !node.text.start_with?('$') do
         node = node.next_sibling
@@ -57,7 +56,7 @@ total_price = 0
       version_name = name_node.text.delete("\n").strip
       if version_name.downcase.include? "(not tournament legal)"
         link = name_node.child.child.attr('href')
-        puts "Ignoro #{version_name} ( #{link} )"
+        puts "Ignoring #{version_name} ( #{link} )"
         next
       end
       if price_tag.start_with?('$')
@@ -79,7 +78,7 @@ total_price = 0
   end
 end
 
-puts "Total: #{total_price}"
+puts "Total: #{total_price.round(2)}"
 
 unless errors.empty?
   errors.each { |error|

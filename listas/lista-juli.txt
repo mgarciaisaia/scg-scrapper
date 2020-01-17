@@ -1,20 +1,21 @@
 4 Blooming Marsh 24
 4 Copperline Gorge 92
 1 Polluted Delta 33
-1 Boseiju, Who Shelters All 14
+1 Boseiju, Who Shelters All SP 17
 2 Treetop Village Gateway 16
 1 Tolaria West 14
 1 Wooded Foothills 28
 1 Oboro, Palace in the Clouds 22
 1 Brushland 8
-3 Living End 84
-2 Marit Lage Token Coldsnap 32
+1 Living End 28
+2 Living End SP 48
+2 Marit Lage Token Coldsnap 22
 1 Necropotence 10
-1 Sensei's Divining Top 30
-2 Emrakul, the Aeons Torn Prerelease 46
+1 Sensei's Divining Top SP 26
+2 Emrakul, the Aeons Torn Prerelease SP 46
 1 Strionic Resonator FOIL 7
 1 Grimoire of the Dead 4
-1 Elspeth, Knight-Errant FOIL 16
+1 Elspeth, Knight-Errant FOIL SP 13
 2 Greater Auramancy 60
 4 Second Sunrise 12
 1 Iona, Shield of Emeria 11
@@ -22,22 +23,23 @@
 1 Restore Balance 9
 2 Elvish Piper 7
 1 Parallel Lives FOIL 25
-4 Wild Nacatl FOIL 20
+4 Wild Nacatl FOIL 15
 1 Ascetism 17
 1 Summoner's Pact 20
 1 Life and Limb 5
-2 Copy Enchantment 26
+1 Copy Enchantment 13
+1 Copy Enchantment SP 11
 4 Hedron Crab 20
 1 Training Grounds 30
 1 Flusterstorm 10
-3 Counterbalance 48
-3 Phyrexian Metamorph Prerelease 54
-1 Seahunter 4
+3 Counterbalance SP 42
+3 Phyrexian Metamorph Prerelease 48
+1 Seahunter SP 3
 1 Rite of Replication 6
 1 Reforge the Soul 7
 2 Banefire 4
-4 Kird Ape FOIL 40
-1 Goblin Guide 20
+4 Kird Ape FOIL 28
+1 Goblin Guide SP 17
 1 Devastating Summonings FOIL 6
 1 Xenagos, God of Revels 22
 1 Dragonlord Atarka 8
@@ -49,4 +51,4 @@
 1 Armadillo Cloak FNM 4
 1 Sygg, River Cutthroat 6
 
-TOTAL U$S 1080
+TOTAL U$S 1017

@@ -39,38 +39,45 @@ total_price = 0
   puts "I don't know #{card_name}" unless card
   next unless card
   begin
-    page = agent.get("http://www.starcitygames.com/results?name=#{card}&auto=Y")
-    nms = page.links.find_all { |link| link.text.include? 'NM/M' }
     cheap_edition = nil
     cheap_price = nil
     cheap_name = nil
-    nms.each { |nm|
-      node = nm.node.parent
-      while !node.text.start_with?('$') do
-        node = node.next_sibling
-      end
-      price_tag = node.children.first.text
-      node = nm.node.parent
-      edition = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.children[1].children.text
-      name_node = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
-      version_name = name_node.text.delete("\n").strip
-      if version_name.downcase.include? "(not tournament legal)"
-        link = name_node.child.child.attr('href')
-        puts "Ignoring #{version_name} ( #{link} )"
-        next
-      end
-      if price_tag.start_with?('$')
-         price = Float(price_tag[1..-1])
-         if !cheap_price || (cheap_price > price)
-            cheap_price = price
-            cheap_edition = edition
-            cheap_name = version_name
-         end
-      else
-          price = "Error! #{price_tag}"
-      end
-      # puts "#{card}|#{price}"
-    }
+
+    page = agent.get("http://www.starcitygames.com/results?name=#{card}&auto=Y")
+
+    nms = page.links.find_all { |link| link.text.include? 'NM/M' }
+    loop do
+      nms.each { |nm|
+        node = nm.node.parent
+        while !node.text.start_with?('$') do
+          node = node.next_sibling
+        end
+        price_tag = node.children.first.text
+        node = nm.node.parent
+        edition = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.children[1].children.text
+        name_node = nm.node.parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        version_name = name_node.text.delete("\n").strip
+        if version_name.downcase.include? "(not tournament legal)"
+          link = name_node.child.child.attr('href')
+          puts "Ignoring #{version_name} ( #{link} )"
+          next
+        end
+        if price_tag.start_with?('$')
+          price = Float(price_tag[1..-1])
+          if !cheap_price || (cheap_price > price)
+              cheap_price = price
+              cheap_edition = edition
+              cheap_name = version_name
+          end
+        else
+            price = "Error! #{price_tag}"
+        end
+      }
+      next_page_link = page.links.find { |link| link.text.include? ' - Next>> ' }
+      break unless next_page_link
+      page = next_page_link.click
+      nms = page.links.find_all { |link| link.text.include? 'NM/M' }
+    end
     puts "#{cheap_name}|#{cheap_price}|#{cheap_edition}"
     total_price += cheap_price if cheap_price
   rescue StandardError => ex

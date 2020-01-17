@@ -3,7 +3,13 @@ require 'mechanize'
 require 'pry-byebug'
 require 'json'
 
-all_cards = JSON.parse(File.read('./AllCards.json'))
+begin
+  all_cards = JSON.parse(File.read('./AllCards.json'))
+rescue
+  puts "We're missing an `AllCards.json` file here - download yours from https://mtgjson.com/downloads/compiled/"
+  exit 1
+end
+
 translations = {}
 all_cards.each { |name, card|
   card["foreignData"].each { |data|

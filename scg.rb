@@ -17,7 +17,7 @@ all_cards.each { |name, card|
   }
   translations[name.downcase] = name.downcase
 }
-puts "I have #{translations.length} names"
+puts "|||I have #{translations.length} names"
 
 all_cards = nil
 
@@ -26,6 +26,7 @@ agent = Mechanize.new
 errors = []
 
 total_price = 0
+card_count = 0
 
 [
 "Bloodstained Mire",
@@ -36,7 +37,7 @@ total_price = 0
 "overgrown tomb"
 ].each do |card_name|
   card = translations[card_name.downcase]
-  puts "I don't know #{card_name}" unless card
+  puts "|||I don't know #{card_name}" unless card
   next unless card
   begin
     cheap_edition = nil
@@ -59,7 +60,7 @@ total_price = 0
         version_name = name_node.text.delete("\n").strip
         if version_name.downcase.include? "(not tournament legal)"
           link = name_node.child.child.attr('href')
-          puts "Ignoring #{version_name} ( #{link} )"
+          puts "|||Ignoring #{version_name} ( #{link} )"
           next
         end
         if price_tag.start_with?('$')
@@ -80,12 +81,13 @@ total_price = 0
     end
     puts "#{cheap_name}|#{cheap_price}|#{cheap_edition}"
     total_price += cheap_price if cheap_price
+    card_count += 1 if cheap_price
   rescue StandardError => ex
     errors << ex
   end
 end
 
-puts "Total: #{total_price.round(2)}"
+puts "#{card_count} cards|#{total_price.round(2)}"
 
 unless errors.empty?
   errors.each { |error|
